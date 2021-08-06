@@ -1,0 +1,37 @@
+<div class="card">
+    <mat-card class="post">
+        <form [formGroup]="postingForm" (ngSubmit)="submitPost()">
+            <div id="title-with-button">
+                <p class="title">Whats on your mind?</p>
+                <button mat-raised-button color="primary" type="submit">
+                    <mat-icon aria-hidden="false" aria-label="comment">send</mat-icon>
+                </button>
+            </div>
+
+            <hr />
+            <mat-form-field id="postContent" appearance="outline">
+                <textarea matInput id="email" type="text" required formControlName="postContent"></textarea>
+            </mat-form-field>
+        </form>
+    </mat-card>
+</div>
+<div class="card" *ngFor="let post of posts">
+    <mat-card class="post">
+        <p class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
+        <p class="timestamp">{{post.createdAt | date:'mediumDate'}}</p>
+        <hr />
+        <p class="content">{{post.Content}}</p>
+        <hr />
+        <ul class="buttonlist">
+            <li>
+                <mat-icon aria-hidden="false" aria-label="like">thumb_up</mat-icon>
+            </li>
+            <li>
+                <mat-icon aria-hidden="false" aria-label="share">share</mat-icon>
+            </li>
+            <li>
+                <mat-icon aria-hidden="false" aria-label="comment">comment</mat-icon>
+            </li>
+        </ul>
+    </mat-card>
+</div>

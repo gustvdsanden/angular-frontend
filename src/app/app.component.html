@@ -1,16 +1,27 @@
 <nav>
+
   <ul>
-    <li>
-      <a
-        routerLink="/register"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        >Register</a
-      >
+    <li *ngIf=(!user.isLogged) routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Freesboek</li>
+    <li *ngIf=(user.isLogged) routerLink="/feed" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Freesboek</li>
+    <li *ngIf=(!user.isLogged)>
+      <button mat-button routerLink="/sign-on" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</button>
+    </li>
+    <li *ngIf=(!user.isLogged)>
+      <button mat-button routerLink="/sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Log in</button>
+    </li>
+    <li *ngIf=(user.isLogged)>
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{user.FirstName}}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item (click)="logOut()">Logout</button>
+      </mat-menu>
+
     </li>
   </ul>
 </nav>
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-

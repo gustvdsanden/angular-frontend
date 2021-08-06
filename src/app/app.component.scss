@@ -1,5 +1,32 @@
-.container{
+.container {
   max-width: 80vw;
-  margin:0 auto;
-
+  margin: 0 auto;
+  overflow: hidden;
+}
+nav {
+  background-color: #673AB7;
+  color:white;
+  
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    margin:0 10px;
+    text-align: right;
+    padding-left:0;
+    li {
+      padding:10px 0px;
+      display:inline-block;
+      &:first-child{
+        font-size: 1.3em;
+        position: absolute;
+        left:10px;
+        top:10px;
+      }
+      a{
+        color:white;
+        text-decoration: none;
+      }
+    }
+  }
 }

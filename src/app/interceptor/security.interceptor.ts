@@ -15,11 +15,12 @@ export class SecurityInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('AccessToken');
+    console.log(token)
     if (token) {
       request = request.clone({
         setHeaders: {
-          "x-access-header": token,
+          "x-access-token": token,
         },
       });
     }

@@ -1,5 +1,3 @@
-<p>registration</p>
-
 <div class="card">
   <mat-card id="registration">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -11,7 +9,6 @@
         <mat-label>Password</mat-label>
         <input matInput id="password" type="password" formControlName="password">
       </mat-form-field>
-      <a>Register</a>
       <button mat-raised-button color="primary" type="submit">Log in</button>
     </form>
 
