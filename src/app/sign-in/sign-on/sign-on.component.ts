@@ -23,9 +23,8 @@ export class SignOnComponent implements OnInit {
   ngOnInit(): void {
   }
   async onSubmit() {
-    console.log(this.registerForm.value);
     let user = this.registerForm.value;
-    this.registerService.createUser(user).subscribe(result => { console.log(result); });
+    this.registerService.createUser(user).subscribe();
     this.router.navigate(['/sign-in']);
   }
 

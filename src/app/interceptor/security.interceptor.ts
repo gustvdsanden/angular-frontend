@@ -16,7 +16,6 @@ export class SecurityInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let token = sessionStorage.getItem('AccessToken');
-    console.log(token)
     if (token) {
       request = request.clone({
         setHeaders: {

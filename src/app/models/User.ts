@@ -1,5 +1,5 @@
 export class User {
-    public Id: string = '';
+    public _id: string = '';
     public FirstName: string= '';
     public LastName: string= '';
     public Email: string= '';

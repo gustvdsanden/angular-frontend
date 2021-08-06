@@ -14,6 +14,12 @@ export class PostService {
     return this.http.get<Post[]>("http://localhost:8080/api/Post");
   }
   createPost(Content: string, Author: User): Observable<Post>{
-    return this.http.post<Post>("http://localhost:8080/api/Post",{Content: Content,Author_Id:Author.Id});
+    return this.http.post<Post>("http://localhost:8080/api/Post",{Content: Content,UserId:Author._id});
+  }
+  deletePost(_id:string):Observable<any>{
+    return this.http.delete(`http://localhost:8080/api/Post/${_id}`);
+  }
+  likePost(_id:string):Observable<any>{
+    return this.http.get(`http://localhost:8080/api/Post/${_id}/like`);
   }
 }

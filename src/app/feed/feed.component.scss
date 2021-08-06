@@ -26,6 +26,9 @@ hr {
         color:var(--primary);
     }
 }
+.liked{
+    color:green;
+}
 #title-with-button{
     display:flex;
     margin:0 auto;
@@ -45,9 +48,6 @@ hr {
 @media only screen and (max-width: 1200px) {
     textarea{
         height:100px;
-    }
-    textarea:focus{
-        height:300px;
     }
 }
 @media only screen and (max-width: 600px) {

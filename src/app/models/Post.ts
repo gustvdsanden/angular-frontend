@@ -1,6 +1,6 @@
 import { User, UserComment } from "./index";
 export class Post {
-    public Id?: string = '';
+    public _id?: string = '';
     public Content: string= '';
     public Author: User = new User;
     public Comments?: UserComment[] = [new UserComment];

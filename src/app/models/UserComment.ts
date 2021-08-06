@@ -1,6 +1,6 @@
 import { User } from "./index";
 export class UserComment {
-    public Id: string='';
+    public _id: string='';
     public Content: string='';
     public Author: User= new User;
     public Like: User[]= [new User];

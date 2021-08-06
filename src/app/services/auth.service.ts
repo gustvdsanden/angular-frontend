@@ -4,14 +4,14 @@ import { BehaviorSubject, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 interface authResponse {
-  Id:string,
+  _id:string,
   Email:string,
   FirstName: string,
   LastName:string,
   AccessToken: string
 }
 type loginDetails ={
-  Id:string,
+  _id:string,
   FirstName:string,
   LastName:string,
   AccessToken:string,
@@ -23,7 +23,7 @@ type loginDetails ={
   providedIn: 'root'
 })
 export class AuthService {
-  loggedUser = new BehaviorSubject({Id:sessionStorage.getItem('Id')? sessionStorage.getItem('Id')!:'',FirstName:sessionStorage.getItem('FirstName')? sessionStorage.getItem('FirstName')!:'',LastName:sessionStorage.getItem('LastName')? sessionStorage.getItem('LastName')!:'',AccessToken:sessionStorage.getItem('AccessToken')? sessionStorage.getItem('AccessToken')!:'',Email:sessionStorage.getItem('Email')? sessionStorage.getItem('Email')!:'',isLogged:sessionStorage.getItem('AccessToken')? true:false});
+  loggedUser = new BehaviorSubject({_id:sessionStorage.getItem('_id')? sessionStorage.getItem('_id')!:'',FirstName:sessionStorage.getItem('FirstName')? sessionStorage.getItem('FirstName')!:'',LastName:sessionStorage.getItem('LastName')? sessionStorage.getItem('LastName')!:'',AccessToken:sessionStorage.getItem('AccessToken')? sessionStorage.getItem('AccessToken')!:'',Email:sessionStorage.getItem('Email')? sessionStorage.getItem('Email')!:'',isLogged:sessionStorage.getItem('AccessToken')? true:false});
   constructor(private http: HttpClient) { }
 
   authenticateUser(email: string, password: string): Observable<authResponse> {
@@ -33,7 +33,7 @@ export class AuthService {
     this.loggedUser.next({...user});
   }
   logOut():void{
-    this.loggedUser.next({Id:'',Email:'',FirstName:'',AccessToken:'',isLogged:false,LastName:''});
+    this.loggedUser.next({_id:'',Email:'',FirstName:'',AccessToken:'',isLogged:false,LastName:''});
     sessionStorage.clear();
   }
   public getLoggedUser():Observable<loginDetails>{

@@ -10,27 +10,47 @@
 
             <hr />
             <mat-form-field id="postContent" appearance="outline">
-                <textarea matInput id="email" type="text" required formControlName="postContent"></textarea>
+                <textarea matInput id="email" type="text" formControlName="postContent"></textarea>
             </mat-form-field>
         </form>
     </mat-card>
 </div>
 <div class="card" *ngFor="let post of posts">
     <mat-card class="post">
-        <p class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
+        <div id="title-with-button">
+            <p class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
+            <p></p>
+            <button *ngIf="post.Author._id == user._id" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="more menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button (click)="deletePost(post._id!)" mat-menu-item>delete</button>
+                <button mat-menu-item>edit</button>
+            </mat-menu>
+        </div>
         <p class="timestamp">{{post.createdAt | date:'mediumDate'}}</p>
         <hr />
         <p class="content">{{post.Content}}</p>
         <hr />
         <ul class="buttonlist">
             <li>
-                <mat-icon aria-hidden="false" aria-label="like">thumb_up</mat-icon>
+                <button mat-icon-button (click)="toggleLike(post._id!)">
+                    <mat-icon [ngClass]="{'liked': didILikeIt(post.Likes!)}" aria-hidden="false" aria-label="like">thumb_up</mat-icon>
+                </button>
+
             </li>
             <li>
-                <mat-icon aria-hidden="false" aria-label="share">share</mat-icon>
+                <button mat-icon-button>
+                    <mat-icon aria-hidden="false" aria-label="share">share</mat-icon>
+                </button>
+
             </li>
             <li>
-                <mat-icon aria-hidden="false" aria-label="comment">comment</mat-icon>
+                <button mat-icon-button>
+                    <mat-icon aria-hidden="false" aria-label="comment">comment</mat-icon>
+                </button>
+
             </li>
         </ul>
     </mat-card>

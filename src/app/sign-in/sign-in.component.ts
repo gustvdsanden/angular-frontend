@@ -18,24 +18,23 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   async onSubmit() {
-    console.log(this.loginForm.value);
-    let {email, password} = this.loginForm.value;
+    let { email, password } = this.loginForm.value;
     this.authService
-      .authenticateUser(email,password)
+      .authenticateUser(email, password)
       .subscribe((result) => {
-        result.FirstName='Gust';
-        result.LastName='van der Sanden';
-        for(let item in result){
+        result.FirstName = 'Gust';
+        result.LastName = 'van der Sanden';
+        for (let item in result) {
           //@ts-ignore
-          sessionStorage.setItem(item.toString(),result[item.toString()])
+          sessionStorage.setItem(item.toString(), result[item.toString()])
         }
-        this.authService.logIn({...result});
+        this.authService.logIn({ ...result });
         this.router.navigate(['/feed']);
-      } );
+      });
   }
-  
+
 }
