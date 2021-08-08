@@ -32,7 +32,7 @@ export class SignInComponent implements OnInit {
           //@ts-ignore
           sessionStorage.setItem(item.toString(), result[item.toString()])
         }
-        this.authService.logIn({ ...result });
+        this.authService.logIn({ ...result ,isLogged:true});
         this.router.navigate(['/feed']);
       });
   }

@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   constructor(private authService:AuthService, private router:Router){}
   title = 'angular-exam';
   user:loginDetails={_id:'',FirstName:'',Email:'',AccessToken:'',isLogged:false};
-  login =this.authService.getLoggedUser().subscribe((result) =>{this.user= {...result, isLogged:true}});
+  login =this.authService.getLoggedUser().subscribe((result) =>{this.user= {...result}});
   token=sessionStorage.getItem("token");
   ngOnInit():void{
 
