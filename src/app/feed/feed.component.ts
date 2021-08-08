@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
-import { Post, User } from '../models/index';
+import { Post, User } from '../models';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 @Component({
