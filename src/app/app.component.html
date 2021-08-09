@@ -1,17 +1,15 @@
 <nav>
 
   <ul>
-    <li *ngIf=(!user.isLogged) routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <li (click)="logoClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       Freesboek</li>
-    <li *ngIf=(user.isLogged) routerLink="/feed" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      Freesboek</li>
-    <li *ngIf=(!user.isLogged)>
+    <li *ngIf=(!loginDetails.isLogged)>
       <button mat-button routerLink="/sign-on" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</button>
     </li>
-    <li *ngIf=(!user.isLogged)>
+    <li *ngIf=(!loginDetails.isLogged)>
       <button mat-button routerLink="/sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Log in</button>
     </li>
-    <li *ngIf=(user.isLogged)>
+    <li *ngIf=(loginDetails.isLogged)>
       <button mat-button [matMenuTriggerFor]="menu">
         {{user.FirstName}}</button>
       <mat-menu #menu="matMenu">

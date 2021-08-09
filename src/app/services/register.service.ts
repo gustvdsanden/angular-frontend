@@ -15,6 +15,6 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   createUser(user:any): Observable<registerResponse>{
-    return this.http.post<registerResponse>("User",{Email: user.email,Password:user.password,FirstName:user.firstname,LastName:user.lastname});
+    return this.http.post<registerResponse>("User",{Email: user.email.toLowerCase(),Password:user.password,FirstName:user.firstname,LastName:user.lastname});
   }
 }

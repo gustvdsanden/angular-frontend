@@ -13,9 +13,10 @@ import { SecurityInterceptor } from './interceptor/security.interceptor';
 import { SignOnComponent } from './sign-in/sign-on/sign-on.component';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
+import { CompanyComponent } from './company/company.component';
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent],
+  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent, CompanyComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

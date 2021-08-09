@@ -26,14 +26,22 @@ export class SignInComponent implements OnInit {
     this.authService
       .authenticateUser(email, password)
       .subscribe((result) => {
-        result.FirstName = 'Gust';
-        result.LastName = 'van der Sanden';
         for (let item in result) {
           //@ts-ignore
           sessionStorage.setItem(item.toString(), result[item.toString()])
         }
-        this.authService.logIn({ ...result ,isLogged:true});
-        this.router.navigate(['/feed']);
+        this.authService.logIn(result._id, result.AccessToken).then((user) => {
+          console.log(user);
+          if (user.Company!._id !='') {
+            this.router.navigate(['/feed']);
+          } else {
+            this.router.navigate(['/company']);
+          }
+        }
+
+        )
+
+
       });
   }
 

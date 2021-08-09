@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { Post, User } from '../models';
 import { FormBuilder } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService, loginDetails } from '../services/auth.service';
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -14,10 +14,12 @@ export class FeedComponent implements OnInit {
   })
   posts: Post[] = [new Post];
   constructor(private authService: AuthService, private postService: PostService, private formBuilder: FormBuilder,) { }
-  user: User = new User;
+  login: loginDetails = new loginDetails;
+  user:User= new User;
   ngOnInit(): void {
     this.authService.getLoggedUser().subscribe(result => {
-      this.user = { ...result }
+      this.login = { ...result }
+      this.user=this.login.user!;
     })
     this.getPosts();
   }

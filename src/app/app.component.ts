@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { User } from './models';
 import { AuthService } from './services/auth.service';
-type loginDetails ={
-  _id:string,
-  FirstName:string,
-  AccessToken:string,
-  Email:string,
-  isLogged: boolean,
-}
+import { loginDetails } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,8 +12,9 @@ export class AppComponent implements OnInit{
   
   constructor(private authService:AuthService, private router:Router){}
   title = 'angular-exam';
-  user:loginDetails={_id:'',FirstName:'',Email:'',AccessToken:'',isLogged:false};
-  login =this.authService.getLoggedUser().subscribe((result) =>{this.user= {...result}});
+  user:User= new User;
+  loginDetails:loginDetails=new loginDetails;
+  login =this.authService.getLoggedUser().subscribe((result) =>{this.loginDetails= {...result}; this.user=this.loginDetails.user!});
   token=sessionStorage.getItem("token");
   ngOnInit():void{
 
@@ -27,5 +22,13 @@ export class AppComponent implements OnInit{
   logOut():void{
     this.authService.logOut();
     this.router.navigate(['/sign-in']);
+  }
+  logoClick():void{
+    if(this.loginDetails.isLogged){
+      if(this.loginDetails.user!.Company) this.router.navigate(['/feed']);
+      else this.router.navigate(['/company']);
+    } else{
+      this.router.navigate([''])
+    }
   }
 }
