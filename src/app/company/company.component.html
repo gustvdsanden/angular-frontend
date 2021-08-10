@@ -1,1 +1,28 @@
-<p>company works!</p>
+<div class="card">
+    <mat-card id="company">
+        <p>You are currently not part of a company, ask for an invite or create one</p>
+        <hr>
+        <p>invitations</p>
+        
+    </mat-card>
+</div>
+<div class="card">
+    <mat-card id="createCompany">
+        <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput id="Name" type="text" required formControlName="Name">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput id="Description" type="text" required formControlName="Description">
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Address</mat-label>
+                <input matInput id="Address" type="text" required formControlName="Address">
+              </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Create a company</button>
+        </form>
+        
+    </mat-card>
+</div>

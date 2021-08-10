@@ -8,26 +8,34 @@ import { loginDetails } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  
-  constructor(private authService:AuthService, private router:Router){}
+export class AppComponent implements OnInit {
+
+  constructor(private authService: AuthService, private router: Router) { }
   title = 'angular-exam';
-  user:User= new User;
-  loginDetails:loginDetails=new loginDetails;
-  login =this.authService.getLoggedUser().subscribe((result) =>{this.loginDetails= {...result}; this.user=this.loginDetails.user!});
-  token=sessionStorage.getItem("token");
-  ngOnInit():void{
+  user: User = new User;
+  loginDetails: loginDetails = new loginDetails;
+  login = this.authService.getLogDetails().subscribe((result) => {
+    this.loginDetails = { ...result };
+    if (result.isLogged) {
+      this.authService.fetchMyUser(result.userId).subscribe((user) => {
+        this.user = user;
+      });
+    }
+
+  });
+  token = sessionStorage.getItem("token");
+  ngOnInit(): void {
 
   }
-  logOut():void{
+  logOut(): void {
     this.authService.logOut();
     this.router.navigate(['/sign-in']);
   }
-  logoClick():void{
-    if(this.loginDetails.isLogged){
-      if(this.loginDetails.user!.Company) this.router.navigate(['/feed']);
+  logoClick(): void {
+    if (this.loginDetails.isLogged) {
+      if (this.user.Company) this.router.navigate(['/feed']);
       else this.router.navigate(['/company']);
-    } else{
+    } else {
       this.router.navigate([''])
     }
   }

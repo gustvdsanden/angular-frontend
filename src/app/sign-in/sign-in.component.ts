@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { RouteConfigLoadEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Company, User } from '../models';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class SignInComponent implements OnInit {
     email: '',
     password: '',
   });
+  loggedUser = this.authService.getLoggedUser().subscribe();
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -21,28 +23,23 @@ export class SignInComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
-  async onSubmit() {
+  onSubmit() {
     let { email, password } = this.loginForm.value;
-    this.authService
-      .authenticateUser(email, password)
-      .subscribe((result) => {
-        for (let item in result) {
-          //@ts-ignore
-          sessionStorage.setItem(item.toString(), result[item.toString()])
+    this.authService.authenticateUser(email, password).then(() => {
+      this.authService.getLogDetails().subscribe(result => {
+        if (result.isLogged) {
+          this.authService.fetchMyUser().subscribe((user) => {
+            if (user.Company) {
+              this.router.navigate(['/feed']);
+            } else {
+              this.router.navigate(['/company']);
+            }
+          });
         }
-        this.authService.logIn(result._id, result.AccessToken).then((user) => {
-          console.log(user);
-          if (user.Company!._id !='') {
-            this.router.navigate(['/feed']);
-          } else {
-            this.router.navigate(['/company']);
-          }
-        }
-
-        )
-
 
       });
+    });
+
   }
 
 }

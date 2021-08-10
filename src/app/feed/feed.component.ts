@@ -12,14 +12,18 @@ export class FeedComponent implements OnInit {
   postingForm = this.formBuilder.group({
     postContent: '',
   })
-  posts: Post[] = [new Post];
+  posts: Post[] = [];
   constructor(private authService: AuthService, private postService: PostService, private formBuilder: FormBuilder,) { }
   login: loginDetails = new loginDetails;
-  user:User= new User;
+  user: User = new User;
   ngOnInit(): void {
-    this.authService.getLoggedUser().subscribe(result => {
+    this.authService.getLogDetails().subscribe(async result => {
       this.login = { ...result }
-      this.user=this.login.user!;
+      if (result.isLogged) {
+        this.authService.fetchMyUser().subscribe((user)=>{
+          this.user = user;
+        });
+      }
     })
     this.getPosts();
   }
@@ -44,7 +48,7 @@ export class FeedComponent implements OnInit {
     this.postService.likePost(_id).subscribe(() => this.getPosts());
   }
   didILikeIt(likes: User[]): boolean {
-    return likes.find(user => user._id = this.user._id)?true:false;
+    return likes.find(user => user._id = this.user._id) ? true : false;
   }
 
 }

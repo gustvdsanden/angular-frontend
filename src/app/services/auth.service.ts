@@ -6,15 +6,12 @@ import { Company, User } from '../models';
 
 interface authResponse {
   _id: string,
-  Email: string,
-  FirstName: string,
-  Company: Company,
-  LastName: string,
+  CompanyId: string,
   AccessToken: string
 }
 export class loginDetails {
   public userId: string = '';
-  public user?: User = new User;
+  public CompanyId: string = '';
   public AccessToken: string = '';
   public isLogged: boolean = false;
   public constructor(init?: Partial<loginDetails>) {
@@ -26,40 +23,40 @@ export class loginDetails {
   providedIn: 'root'
 })
 export class AuthService {
-  loggedUser = new BehaviorSubject<loginDetails>({
-    user: {
-      _id:sessionStorage.getItem('_id') ? sessionStorage.getItem('_id')! : '',
-      FirstName:sessionStorage.getItem('FirstName') ? sessionStorage.getItem('FirstName')! : '',
-      LastName:sessionStorage.getItem('LastName') ? sessionStorage.getItem('LastName')! : '',
-      Email:sessionStorage.getItem('Email') ? sessionStorage.getItem('Email')! : '',
-    },
+  logDetails = new BehaviorSubject<loginDetails>({
     userId: sessionStorage.getItem('_id') ? sessionStorage.getItem('_id')! : '',
     AccessToken: sessionStorage.getItem('AccessToken') ? sessionStorage.getItem('AccessToken')! : '',
+    CompanyId: sessionStorage.getItem('CompanyId') ? sessionStorage.getItem('CompanyId')! : '',
     isLogged: sessionStorage.getItem('AccessToken') ? true : false,
   });
+  loggedUser = new BehaviorSubject<User>(new User);
   constructor(private http: HttpClient) { }
-  authenticateUser(email: string, password: string): Observable<authResponse> {
-    return this.http.post<authResponse>("User/authenticate", { Username: email.toLowerCase(), Password: password });
-  }
-  async logIn(id?: string, AccessToken: string = ''): Promise<User> {
-    let user: User = new User;
-    if (id) {
-      await this.http.get<User>("User/" + id).subscribe(result => {
-        this.loggedUser.next({ userId: id, user: { ...result }, AccessToken: AccessToken, isLogged: true });
-        user = result
-        sessionStorage.setItem("FirstName",result.FirstName);
-        sessionStorage.setItem("LastName",result.LastName);
-        sessionStorage.setItem("Email",result.Email);
+  async authenticateUser(email: string, password: string): Promise<void> {
+    this.http.post<authResponse>("User/authenticate", { Username: email.toLowerCase(), Password: password }).subscribe((authResponse: authResponse) => {
+      for (let item in authResponse) {
+        //@ts-ignore
+        sessionStorage.setItem(item.toString(), authResponse[item.toString()])
       }
-      );
-    }
-    return user;
+      this.logDetails.next({ userId:authResponse._id,AccessToken:authResponse.AccessToken,CompanyId:authResponse.CompanyId, isLogged: true })
+      if (authResponse.AccessToken) {
+        this.fetchMyUser(authResponse._id).subscribe(result => {
+          this.loggedUser.next(result);
+        })
+      }
+    });
+  }
+  fetchMyUser(userId: string = this.logDetails.getValue().userId): Observable<User> {
+    return this.http.get<User>("User/" + userId);
   }
   logOut(): void {
-    this.loggedUser.next(new loginDetails);
+    this.logDetails.next(new loginDetails);
+    this.loggedUser.next(new User);
     sessionStorage.clear();
   }
-  public getLoggedUser(): Observable<loginDetails> {
+  public getLogDetails(): Observable<loginDetails> {
+    return this.logDetails.asObservable();
+  }
+  public getLoggedUser(): Observable<User> {
     return this.loggedUser.asObservable();
   }
 }
