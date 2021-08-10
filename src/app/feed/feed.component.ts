@@ -30,7 +30,7 @@ export class FeedComponent implements OnInit {
   submitPost() {
     if (this.postingForm.value.postContent != '') {
       this.postService.createPost(this.postingForm.value.postContent, this.user).subscribe(result => {
-        this.posts.unshift({ ...result });
+        this.getPosts();
         this.postingForm.reset();
       });
     }
