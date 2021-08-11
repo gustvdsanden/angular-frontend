@@ -14,23 +14,27 @@ export class AppComponent implements OnInit {
   title = 'angular-exam';
   user: User = new User;
   loginDetails: loginDetails = new loginDetails;
-  login = this.authService.getLogDetails().subscribe((result) => {
-    this.loginDetails = { ...result };
-    if (result.isLogged) {
-      this.authService.fetchMyUser(result.userId).subscribe((user) => {
-        this.user = user;
-      });
-    }
-  });
+  getLoggin():void{
+    this.authService.getLogDetails().subscribe((result) => {
+      this.loginDetails = { ...result };
+      if (result.isLogged) {
+        this.authService.fetchMyUser(result.userId).subscribe((user) => {
+          this.user = user;
+        });
+      }
+    });
+  }
+  
   token = sessionStorage.getItem("token");
   ngOnInit(): void {
-
+    this.getLoggin()
   }
   logOut(): void {
     this.authService.logOut();
     this.router.navigate(['/sign-in']);
   }
   logoClick(): void {
+    this.getLoggin()
     if (this.loginDetails.isLogged) {
       if (this.user.Company) this.router.navigate(['/feed']);
       else this.router.navigate(['/company']);

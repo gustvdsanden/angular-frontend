@@ -1,6 +1,8 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { CompanyService } from '../services/company.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class CompanyComponent implements OnInit {
   });
   constructor(
     private formBuilder: FormBuilder,
+    private authService:AuthService,
     private companyService: CompanyService,
     private router:Router
     ){}
@@ -23,8 +26,9 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit():void{
-    this.companyService.createCompany(this.companyForm.value).subscribe(()=>{
-      this.router.navigate(['/feed']);
+    this.companyService.createCompany(this.companyForm.value).subscribe((result)=>{
+      this.authService.logOut();
+      this.router.navigate(['']);
     });
   }
 }
