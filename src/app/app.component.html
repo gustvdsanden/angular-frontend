@@ -13,7 +13,7 @@
       <button mat-button [matMenuTriggerFor]="menu">
         {{user.FirstName}}</button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Item 1</button>
+      <button *ngIf="(user.Role.Name=='Superadmin')" routerLink="/company/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" mat-menu-item>My Company</button>
         <button mat-menu-item (click)="logOut()">Logout</button>
       </mat-menu>
 

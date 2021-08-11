@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
         this.user = user;
       });
     }
-
   });
   token = sessionStorage.getItem("token");
   ngOnInit(): void {

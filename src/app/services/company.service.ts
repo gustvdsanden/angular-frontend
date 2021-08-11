@@ -14,4 +14,10 @@ export class CompanyService {
     return this.http.post<Company>("Company/",company);
     
   }
+  getMyCompany():Observable<Company>{
+    return this.http.get<Company>("Company/mine");
+  }
+  editCompany(company:Company):Observable<Company>{
+    return this.http.put<Company>("Company/"+company._id,company);
+  }
 }

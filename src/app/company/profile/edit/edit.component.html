@@ -1,0 +1,22 @@
+
+    <div id="companyProfile">
+        <h2>Edit</h2>
+        <form [formGroup]="companyEditForm" (ngSubmit)="save()">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput id="Name" type="text" required formControlName="Name">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Description</mat-label>
+              <input matInput id="Description" type="text" required formControlName="Description">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Address</mat-label>
+              <input matInput id="Address" type="text" required formControlName="Address">
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary" aria-label="save">
+                Save
+            </button>
+          </form>
+        
+        </div>

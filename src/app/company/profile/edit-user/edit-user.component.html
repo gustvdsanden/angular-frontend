@@ -1,0 +1,12 @@
+<div id="companyProfile">
+    <h2>Edit</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Role</mat-label>
+        <select [(ngModel)]="selectedRole._id" matNativeControl required>
+            <option *ngFor="let role of roles" [value]="role._id">{{role.Name}}</option>
+        </select>
+    </mat-form-field>
+    <button (click)="save()" mat-raised-button color="primary" aria-label="save">
+        Save
+    </button>
+</div>

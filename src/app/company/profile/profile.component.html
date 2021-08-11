@@ -1,0 +1,40 @@
+<div class="card">
+  <mat-card id="companyProfile">
+    <div id="name-with-button">
+      <p id="name">{{company.Name}}</p>
+      <p></p>
+      <button *ngIf="user.Role.Name=='Superadmin'" (click)="openCompanyDialog()" mat-icon-button aria-label="edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <p id="address">{{company.Address}}</p>
+    <hr>
+    <p id="description">{{company.Description}}</p>
+
+  </mat-card>
+  <div id="table">
+    <h2>All colleagues</h2>
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Role">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let element"> {{element.Role.Name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+          <button *ngIf="element._id!=user._id" (click)="openUserDialog(element._id)" mat-icon-button aria-label="edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

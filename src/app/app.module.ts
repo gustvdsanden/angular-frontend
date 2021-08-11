@@ -14,9 +14,12 @@ import { SignOnComponent } from './sign-in/sign-on/sign-on.component';
 import { LandingComponent } from './landing/landing.component';
 import { FeedComponent } from './feed/feed.component';
 import { CompanyComponent } from './company/company.component';
+import { ProfileComponent } from './company/profile/profile.component';
+import { EditComponent } from './company/profile/edit/edit.component';
+import { EditUserComponent } from './company/profile/edit-user/edit-user.component';
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent, CompanyComponent],
+  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent, CompanyComponent, ProfileComponent, EditComponent, EditUserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
