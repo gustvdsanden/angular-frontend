@@ -4,16 +4,20 @@
     <li (click)="logoClick()" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       Freesboek</li>
     <li *ngIf=(!loginDetails.isLogged)>
-      <button mat-button routerLink="/sign-on" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Register</button>
+      <button mat-button routerLink="/sign-on" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">Register</button>
     </li>
     <li *ngIf=(!loginDetails.isLogged)>
-      <button mat-button routerLink="/sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Log in</button>
+      <button mat-button routerLink="/sign-in" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Log
+        in</button>
     </li>
     <li *ngIf=(loginDetails.isLogged)>
       <button mat-button [matMenuTriggerFor]="menu">
         {{user.FirstName}}</button>
       <mat-menu #menu="matMenu">
-      <button *ngIf="(user.Role.Name=='Superadmin')" routerLink="/company/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" mat-menu-item>My Company</button>
+        <button (click)="navToProfile()" mat-menu-item>My Profile</button>
+        <button *ngIf="(user.Role.Name=='Superadmin')" routerLink="/company/profile" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }" mat-menu-item>My Company</button>
         <button mat-menu-item (click)="logOut()">Logout</button>
       </mat-menu>
 

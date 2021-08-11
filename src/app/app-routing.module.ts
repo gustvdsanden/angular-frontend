@@ -6,6 +6,7 @@ import { FeedComponent } from './feed/feed.component';
 import { LandingComponent } from './landing/landing.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignOnComponent } from './sign-in/sign-on/sign-on.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'feed', component: FeedComponent },
   { path: 'company', component: CompanyComponent},
   { path: 'company/profile', component: ProfileComponent },
+  { path: 'user/profile', component: UserProfileComponent },
 ];
 
 @NgModule({

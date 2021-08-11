@@ -18,7 +18,7 @@
 <div class="card" *ngFor="let post of posts">
     <mat-card class="post">
         <div id="title-with-button">
-            <p class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
+            <p (click)="navToProfile(post.Author._id)" class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
             <p></p>
             <button *ngIf="post.Author._id == user._id" mat-icon-button [matMenuTriggerFor]="menu"
                 aria-label="more menu">

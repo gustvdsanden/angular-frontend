@@ -3,6 +3,7 @@ import { PostService } from '../services/post.service';
 import { Post, User } from '../models';
 import { FormBuilder } from '@angular/forms';
 import { AuthService, loginDetails } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -13,19 +14,20 @@ export class FeedComponent implements OnInit {
     postContent: '',
   })
   posts: Post[] = [];
-  constructor(private authService: AuthService, private postService: PostService, private formBuilder: FormBuilder,) { }
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private postService: PostService, private formBuilder: FormBuilder,) { }
   login: loginDetails = new loginDetails;
   user: User = new User;
   ngOnInit(): void {
     this.authService.getLogDetails().subscribe(async result => {
       this.login = { ...result }
       if (result.isLogged) {
-        this.authService.fetchMyUser().subscribe((user)=>{
+        this.authService.fetchMyUser().subscribe((user) => {
           this.user = user;
         });
       }
     })
     this.getPosts();
+
   }
   submitPost() {
     if (this.postingForm.value.postContent != '') {
@@ -49,6 +51,9 @@ export class FeedComponent implements OnInit {
   }
   didILikeIt(likes: User[]): boolean {
     return likes.find(user => user._id = this.user._id) ? true : false;
+  }
+  navToProfile(userId:string): void {
+    this.router.navigate(['/user/profile'], { queryParams: { userId: userId } })
   }
 
 }

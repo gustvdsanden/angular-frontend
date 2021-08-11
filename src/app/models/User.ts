@@ -9,6 +9,7 @@ export class User {
     public Email: string= '';
     public Role: Role= new Role;
     public Company?: Company= new Company;
+    public createdAt?: Date;
     public constructor(init?:Partial<User>) {
         Object.assign(this, init);
     }

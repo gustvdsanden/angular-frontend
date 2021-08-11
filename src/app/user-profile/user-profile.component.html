@@ -1,0 +1,17 @@
+<div class="card">
+    <mat-card id="companyProfile">
+        <div id="name-with-button">
+            <h1 id="name">{{profileUser.FirstName}} {{profileUser.LastName}}</h1>
+            <p></p>
+            <button *ngIf="myUser._id==profileUser._id" mat-icon-button aria-label="edit">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        <hr>
+        <p id="email">Email: {{profileUser.Email}}</p>
+
+        <p id="since">Member since: {{profileUser.createdAt | date:'mediumDate'}}</p>
+
+        <p id="company">Company: {{profileUser.Company!.Name}}</p>
+    </mat-card>
+</div>

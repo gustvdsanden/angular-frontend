@@ -38,4 +38,7 @@ export class AppComponent implements OnInit {
       this.router.navigate([''])
     }
   }
+  navToProfile():void{
+    this.router.navigate(['/user/profile'],{queryParams:{userId:this.loginDetails.userId}})
+  }
 }
