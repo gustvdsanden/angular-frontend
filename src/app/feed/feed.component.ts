@@ -32,7 +32,7 @@ export class FeedComponent implements OnInit {
   submitPost() {
     if (this.postingForm.value.postContent != '') {
       this.postService.createPost(this.postingForm.value.postContent, this.user).subscribe(result => {
-        this.getPosts();
+        this.posts.unshift(result);
         this.postingForm.reset();
       });
     }
@@ -43,6 +43,9 @@ export class FeedComponent implements OnInit {
   }
   getPosts() {
     this.postService.getPosts().subscribe(result => {
+      console.log(result.map((post)=>{
+        return {Likes:{...post.Likes}}  
+      }))
       this.posts = [...result];
     });
   }
@@ -50,6 +53,7 @@ export class FeedComponent implements OnInit {
     this.postService.likePost(_id).subscribe(() => this.getPosts());
   }
   didILikeIt(likes: User[]): boolean {
+    
     return likes.find(user => user._id = this.user._id) ? true : false;
   }
   navToProfile(userId:string): void {

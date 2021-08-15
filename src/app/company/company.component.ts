@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,8 +26,8 @@ export class CompanyComponent implements OnInit {
   }
   onSubmit():void{
     this.companyService.createCompany(this.companyForm.value).subscribe((result)=>{
-      this.authService.logOut();
-      this.router.navigate(['']);
+      this.authService.getNewToken();
+      this.router.navigate(['company/profile']);
     });
   }
 }

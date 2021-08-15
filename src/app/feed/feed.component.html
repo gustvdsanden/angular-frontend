@@ -15,10 +15,17 @@
         </form>
     </mat-card>
 </div>
+<div *ngIf="posts.length <=0">
+    <mat-card class="post">
+        <p>Be the first to post something now!</p>
+    </mat-card>
+</div>
 <div class="card" *ngFor="let post of posts">
     <mat-card class="post">
+        
         <div id="title-with-button">
-            <p (click)="navToProfile(post.Author._id)" class="title">{{post.Author.FirstName}} {{post.Author.LastName}}</p>
+            <p (click)="navToProfile(post.Author._id)" class="title">{{post.Author.FirstName}} {{post.Author.LastName}}
+            </p>
             <p></p>
             <button *ngIf="post.Author._id == user._id" mat-icon-button [matMenuTriggerFor]="menu"
                 aria-label="more menu">
@@ -35,17 +42,16 @@
         <hr />
         <ul class="buttonlist">
             <li>
-                <button mat-icon-button (click)="toggleLike(post._id!)">
-                    <mat-icon [ngClass]="{'liked': didILikeIt(post.Likes!)}" aria-hidden="false" aria-label="like">thumb_up</mat-icon>
-                </button>
-
+                {{post.Likes?post.Likes.length:0}} likes
             </li>
             <li>
-                <button mat-icon-button>
-                    <mat-icon aria-hidden="false" aria-label="share">share</mat-icon>
+                <button mat-icon-button (click)="toggleLike(post._id!)">
+                    <mat-icon [ngClass]="{'liked': didILikeIt(post.Likes!)}" aria-hidden="false" aria-label="like">
+                        thumb_up</mat-icon>
                 </button>
 
             </li>
+            
             <li>
                 <button mat-icon-button>
                     <mat-icon aria-hidden="false" aria-label="comment">comment</mat-icon>
@@ -55,3 +61,5 @@
         </ul>
     </mat-card>
 </div>
+
+     

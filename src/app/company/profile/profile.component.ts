@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   users: Partial<User>[] = [];
   roles: Role[] = [];
   user:User = new User;
+  usersNoComp:User[] = [];
   ngOnInit(): void {
     this.companyService.getMyCompany().subscribe((company) => {
       this.company = company;
@@ -38,6 +39,13 @@ export class ProfileComponent implements OnInit {
         });
       }
     });
+    this.getUsersNoComp()
+    
+  }
+  getUsersNoComp():void{
+    this.userService.getUsersNoCompany().subscribe((users)=>{
+      this.usersNoComp = users;
+    })
   }
   getUsers():void{
     this.userService.getUsersOfCompany().subscribe((users) => {
@@ -74,6 +82,12 @@ export class ProfileComponent implements OnInit {
           this.getUsers()
         })
       }
+    });
+  }
+  addToCompany(userId: string):void{
+    this.userService.addUserToCompany(userId).subscribe((user)=>{
+      this.getUsers();
+      this.getUsersNoComp()
     });
   }
 

@@ -37,12 +37,21 @@ export class AuthService {
         //@ts-ignore
         sessionStorage.setItem(item.toString(), authResponse[item.toString()])
       }
-      this.logDetails.next({ userId:authResponse._id,AccessToken:authResponse.AccessToken,CompanyId:authResponse.CompanyId, isLogged: true })
+      this.logDetails.next({ userId: authResponse._id, AccessToken: authResponse.AccessToken, CompanyId: authResponse.CompanyId, isLogged: true })
       if (authResponse.AccessToken) {
         this.fetchMyUser(authResponse._id).subscribe(result => {
           this.loggedUser.next(result);
         })
       }
+    });
+  }
+  getNewToken(): void {
+    this.http.get<authResponse>("User/token/" + sessionStorage.getItem("_id")).subscribe((authResponse: authResponse) => {
+      for (let item in authResponse) {
+        //@ts-ignore
+        sessionStorage.setItem(item.toString(), authResponse[item.toString()])
+      }
+      this.logDetails.next({ userId: authResponse._id, AccessToken: authResponse.AccessToken, CompanyId: authResponse.CompanyId, isLogged: true })
     });
   }
   fetchMyUser(userId: string = this.logDetails.getValue().userId): Observable<User> {

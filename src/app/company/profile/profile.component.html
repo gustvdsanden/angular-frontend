@@ -1,5 +1,5 @@
 <div class="card">
-  <mat-card id="companyProfile">
+  <mat-card class="companyProfile">
     <div id="name-with-button">
       <p id="name">{{company.Name}}</p>
       <p></p>
@@ -37,4 +37,24 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+  <div *ngIf="user.Role.Name=='Superadmin'">
+    <h2>Invite new users</h2>
+    <mat-card class="companyProfile">
+      <div *ngFor="let user of usersNoComp">
+        <div id="name-with-button">
+          <h3>{{user.FirstName}} {{user.LastName}}</h3>
+          <p></p>
+          <button (click)="addToCompany(user._id)" mat-icon-button aria-label="edit">
+            <mat-icon>mail</mat-icon>
+          </button>
+
+        </div>
+        <hr>
+      </div>
+
+
+
+    </mat-card>
+  </div>
+
 </div>
