@@ -1,8 +1,9 @@
 
 .post {
-    margin: 10px auto 5px;
+    margin: 10px auto 0px;
     width: 85%;
     max-width: 80vw;
+    z-index: 3;
 }
 .title{
     font-weight: bold;
@@ -44,6 +45,16 @@ hr {
     textarea{
         transition: height 2s;
     }
+}
+.comment{
+    width:70%;
+    margin:0 auto;
+}
+.grey{
+    background-color: lightgray;
+    padding:4px;
+    border-radius: 5%;
+    margin-bottom: 5px;
 }
 @media only screen and (max-width: 1200px) {
     textarea{

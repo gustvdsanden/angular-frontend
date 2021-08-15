@@ -1,0 +1,10 @@
+<div id="commentComponent">
+    <h2>New Comment</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Comment</mat-label>
+        <textarea matInput [(ngModel)]="Comment"></textarea>
+    </mat-form-field>
+    <button (click)="save()" mat-raised-button color="primary" aria-label="save">
+        Save
+    </button>
+</div>

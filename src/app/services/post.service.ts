@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Post, User} from '../models/index';
+import { Post, User, UserComment} from '../models/index';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,8 @@ export class PostService {
   }
   likePost(_id:string):Observable<any>{
     return this.http.get(`Post/${_id}/like`);
+  }
+  addComment(postId:string,Comment:UserComment):Observable<Post>{
+    return this.http.post<Post>(`Post/${postId}/Comment`,Comment);
   }
 }

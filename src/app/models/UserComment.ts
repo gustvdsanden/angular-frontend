@@ -4,6 +4,7 @@ export class UserComment {
     public Content: string='';
     public Author: User= new User;
     public Like: User[]= [new User];
+    public createdAt?: Date= new Date;
     public constructor(init?:Partial<UserComment>) {
         Object.assign(this, init);
     }

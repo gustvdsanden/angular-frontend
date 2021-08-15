@@ -17,7 +17,7 @@ export class UserService {
     return this.http.get<User>("User/"+userId);
   }
   editUser(user:User): Observable<User>{
-    return this.http.put<User>("User/"+user._id,{Role:user.Role._id});
+    return this.http.put<User>("User/"+user._id,user);
   }
   getUsersNoCompany():Observable<User[]>{
     return this.http.get<User[]>("User/Company/noComp");

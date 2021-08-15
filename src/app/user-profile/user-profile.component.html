@@ -3,7 +3,7 @@
         <div id="name-with-button">
             <h1 id="name">{{profileUser.FirstName}} {{profileUser.LastName}}</h1>
             <p></p>
-            <button *ngIf="myUser._id==profileUser._id" mat-icon-button aria-label="edit">
+            <button *ngIf="myUser._id==profileUser._id" (click)="openEditDialog()" mat-icon-button aria-label="edit">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>

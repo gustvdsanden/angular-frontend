@@ -54,11 +54,20 @@
             
             <li>
                 <button mat-icon-button>
-                    <mat-icon aria-hidden="false" aria-label="comment">comment</mat-icon>
+                    <mat-icon aria-hidden="false" (click)="commentDialog(post._id!)" aria-label="comment">comment</mat-icon>
                 </button>
 
             </li>
         </ul>
+    </mat-card>
+    <mat-card *ngIf="post.Comments!.length>0" class="comment">
+        <div *ngFor="let comment of post.Comments" class="grey">
+            <p (click)="navToProfile(comment.Author._id)" class="title">{{comment.Author.FirstName}} {{comment.Author.LastName}}</p>
+            <p class="timestamp">{{comment.createdAt | date:'mediumDate'}}</p>
+        <hr />
+        <p class="content">{{comment.Content}}</p>
+        </div>
+
     </mat-card>
 </div>
 

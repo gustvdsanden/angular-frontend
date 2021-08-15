@@ -18,9 +18,11 @@ import { ProfileComponent } from './company/profile/profile.component';
 import { EditComponent } from './company/profile/edit/edit.component';
 import { EditUserComponent } from './company/profile/edit-user/edit-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EditComponent as EditUserProfileComponent } from './user-profile/edit/edit.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent, CompanyComponent, ProfileComponent, EditComponent, EditUserComponent, UserProfileComponent],
+  declarations: [AppComponent, SignInComponent,SignOnComponent, LandingComponent, FeedComponent, CompanyComponent, ProfileComponent, EditComponent, EditUserComponent, UserProfileComponent,EditUserProfileComponent, CommentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
